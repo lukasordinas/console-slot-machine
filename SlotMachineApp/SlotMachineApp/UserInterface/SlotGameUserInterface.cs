@@ -36,7 +36,24 @@ namespace SlotMachineApp.UserInterface
 
         private void DepositPrompt()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Please enter a deposit amount:");
+
+            bool deposited = false;
+            while (!deposited)
+            {
+                if (decimal.TryParse(Console.ReadLine(), out var amount))
+                {
+                    if (account.Deposit(amount)){
+                        deposited = true;
+                        Console.WriteLine("Deposit successful, new balance: {0}", account.Balance);
+                    }
+                }
+
+                if (!deposited)
+                {
+                    Console.WriteLine("Deposit failed, please try again");
+                }
+            }
         }
 
         private void PlayGame()

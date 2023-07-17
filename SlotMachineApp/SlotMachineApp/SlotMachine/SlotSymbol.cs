@@ -12,12 +12,15 @@ namespace SlotMachineApp.SlotMachine
 
         public float Probability { get; }
 
-        public SlotSymbol(char symbol, string name, float coefficient, float probability)
+        public bool IsWildcard { get; }
+
+        public SlotSymbol(char symbol, string name, float coefficient, float probability, bool isWildcard)
         {
             this.Symbol = symbol;
             this.Name = name;
             this.Coefficient = coefficient;
             this.Probability = probability;
+            this.IsWildcard = isWildcard;
         }
     }
 }

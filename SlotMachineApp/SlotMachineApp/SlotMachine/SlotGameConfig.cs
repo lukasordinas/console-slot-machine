@@ -10,20 +10,26 @@ namespace SlotMachineApp.SlotMachine
 
         public string GameTitle { get; }
 
+        public int Rows { get; }
+
+        public int Columns { get; }
+
         public SlotGameConfig(string configFilePath)
 		{
             var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile(configFilePath);
 
-            var config = configBuilder.Build();
-
-            if (config != null)
+            try
             {
+                var config = configBuilder.Build();
+
                 this.GameTitle = config["GameTitle"]!;
                 this.Symbols = config.GetSection("SlotSymbols").Get<IEnumerable<SlotSymbol>>()!;
+                this.Rows = int.Parse(config["Rows"]!);
+                this.Columns = int.Parse(config["Columns"]!);
             }
-            else
+            catch
             {
                 throw new InvalidOperationException("Invalid config json");
             }
@@ -41,6 +47,27 @@ namespace SlotMachineApp.SlotMachine
             if (this.Symbols == null || !this.Symbols.Any())
             {
                 throw new InvalidOperationException("Invalid SlotSymbols config");
+            }
+
+            if (this.Rows < 1)
+            {
+                throw new InvalidOperationException("Invalid Rows config");
+            }
+
+            if (this.Columns < 1)
+            {
+                throw new InvalidOperationException("Invalid Columns config");
+            }
+
+            // confirm that the sum of probabilities is exactly 1
+            double totalProbability = 0;
+            foreach (var symbol in this.Symbols)
+            {
+                totalProbability += symbol.Probability;
+            }
+            if (Math.Round(totalProbability, 2) != 1)
+            {
+                throw new InvalidOperationException("Invalid Probability config");
             }
         }
     }

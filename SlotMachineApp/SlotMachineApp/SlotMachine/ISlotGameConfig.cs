@@ -11,5 +11,9 @@ namespace SlotMachineApp.SlotMachine
         public IEnumerable<SlotSymbol> Symbols { get; }
 
         public string GameTitle { get; }
+
+        public int Rows { get; }
+
+        public int Columns { get; }
     }
 }

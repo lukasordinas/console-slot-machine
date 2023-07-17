@@ -14,5 +14,7 @@ namespace SlotMachineApp.SlotMachine
 			this.config = config;
 			this.account = account;
 		}
+
+		public string GameTitle { get => config.GameTitle; }
 	}
 }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SlotMachineApp.SlotMachine
+namespace SlotMachineApp.UserInterface
 {
-    public interface ISlotGame
+    public interface ISlotGameUserInterface
     {
-        public string GameTitle { get; }
+        public void Run();
     }
 }

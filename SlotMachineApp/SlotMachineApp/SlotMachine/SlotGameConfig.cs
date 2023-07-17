@@ -6,9 +6,9 @@ namespace SlotMachineApp.SlotMachine
 {
 	public class SlotGameConfig : ISlotGameConfig
 	{
-        public IEnumerable<SlotSymbol> Symbols { get; } = Enumerable.Empty<SlotSymbol>();
+        public IEnumerable<SlotSymbol> Symbols { get; }
 
-        public string GameTitle { get; } = string.Empty;
+        public string GameTitle { get; }
 
         public SlotGameConfig(string configFilePath)
 		{

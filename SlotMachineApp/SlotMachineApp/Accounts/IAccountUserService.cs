@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SlotMachineApp.Accounts
 {
-    internal interface IAccountUserService
+    public interface IAccountUserService
     {
         public decimal Balance { get; }
 

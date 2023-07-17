@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SlotMachineApp.Accounts;
 using SlotMachineApp.SlotMachine;
+using SlotMachineApp.UserInterface;
 
 namespace SlotMachineApp
 {
@@ -13,7 +14,7 @@ namespace SlotMachineApp
             var serviceProvider = services.BuildServiceProvider();
 
             var slotMachineApp = serviceProvider.GetRequiredService<SlotMachineApp>();
-            slotMachineApp.Run();
+            slotMachineApp.Run(serviceProvider);
         }
 
         private static void ConfigureServices(IServiceCollection services)
@@ -26,14 +27,19 @@ namespace SlotMachineApp
                 provider.GetRequiredService<ISlotGameConfig>(),
                 provider.GetRequiredService<IAccountGameService>()
                 ));
+            services.AddSingleton<ISlotGameUserInterface>(provider => new SlotGameUserInterface(
+                provider.GetRequiredService<IAccountUserService>(),
+                provider.GetRequiredService<ISlotGame>()
+                ));
             services.AddSingleton<SlotMachineApp>();
             var serviceProvider = services.BuildServiceProvider();
 
         }
 
-        private void Run()
+        private void Run(IServiceProvider serviceProvider)
         {
-            throw new NotImplementedException();
+            var ui = serviceProvider.GetRequiredService<ISlotGameUserInterface>();
+            ui.Run();
         }
     }
 }

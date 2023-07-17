@@ -43,7 +43,8 @@ namespace SlotMachineApp.UserInterface
             {
                 if (decimal.TryParse(Console.ReadLine(), out var amount))
                 {
-                    if (account.Deposit(amount)){
+                    if (account.Deposit(amount))
+                    {
                         deposited = true;
                         Console.WriteLine("Deposit successful, new balance: {0}", account.Balance);
                     }
@@ -58,7 +59,15 @@ namespace SlotMachineApp.UserInterface
 
         private void PlayGame()
         {
-            throw new NotImplementedException();
+            var playing = true;
+            while (playing)
+            {
+                Console.WriteLine("Please enter the amount you would like to bet and press ENTER to spin");
+                if (decimal.TryParse(Console.ReadLine(), out var amount))
+                {
+                    game.Spin()
+                }
+            }
         }
 
         private void End()

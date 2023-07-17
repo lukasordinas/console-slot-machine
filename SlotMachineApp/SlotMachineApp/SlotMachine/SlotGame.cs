@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SlotMachineApp.Accounts;
+using System;
 
 namespace SlotMachineApp.SlotMachine
 {
@@ -6,9 +7,12 @@ namespace SlotMachineApp.SlotMachine
 	{
 		private ISlotGameConfig config;
 
-		public SlotGame(ISlotGameConfig config)
+		private IAccountGameService account;
+
+		public SlotGame(ISlotGameConfig config, IAccountGameService account)
 		{
 			this.config = config;
+			this.account = account;
 		}
 	}
 }

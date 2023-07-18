@@ -4,11 +4,14 @@ using System;
 
 namespace SlotMachineApp.SlotMachine
 {
+	/// <summary>
+	/// Game logic of the slot game
+	/// </summary>
 	public class SlotGame : ISlotGame
 	{
-		private ISlotGameConfig config;
+		private readonly ISlotGameConfig config;
 
-		private IAccountGameService account;
+		private readonly IAccountGameService account;
         public string GameTitle { get => config.GameTitle; }
 
         public SlotGame(ISlotGameConfig config, IAccountGameService account)
@@ -95,7 +98,7 @@ namespace SlotMachineApp.SlotMachine
 
         private SlotSymbol? GenerateRandomSymbol()
         {
-			Random random = new Random();
+			Random random = new();
 			var randomNumber = random.NextDouble();
 			double cumulativeProbability = 0;
 

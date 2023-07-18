@@ -1,19 +1,14 @@
 ﻿using SlotMachineApp.Accounts;
 using SlotMachineApp.SlotMachine;
 using SlotMachineApp.SlotMachine.Spins;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SlotMachineApp.UserInterface
 {
     public class SlotGameUserInterface : ISlotGameUserInterface
     {
-        private IAccountUserService account;
+        private readonly IAccountUserService account;
 
-        private ISlotGame game;
+        private readonly ISlotGame game;
 
         public SlotGameUserInterface(IAccountUserService account, ISlotGame game)
         {
@@ -44,10 +39,10 @@ namespace SlotMachineApp.UserInterface
             {
                 if (decimal.TryParse(Console.ReadLine(), out var amount))
                 {
-                    if (account.Deposit(amount))
+                    if (account.Deposit(Math.Round(amount, 2)))
                     {
                         deposited = true;
-                        Console.WriteLine("Deposit successful, new balance: {0}", Math.Round(account.Balance, 2));
+                        Console.WriteLine("Deposit successful, new balance: {0}\n", account.Balance.ToString("F"));
                     }
                 }
 
@@ -68,13 +63,18 @@ namespace SlotMachineApp.UserInterface
                 {
                     this.Spin(amount);
                 }
+
+                if (Math.Round(this.account.Balance, 2) <= 0)
+                {
+                    playing = false;
+                }
             }
         }
 
         private void Spin(decimal amount)
         {
             Console.WriteLine("");
-            var result = game.Spin(amount);
+            var result = this.game.Spin(amount);
 
             if (result == null)
             {
@@ -89,10 +89,10 @@ namespace SlotMachineApp.UserInterface
 
             if (result.TotalWinnings > 0)
             {
-                Console.WriteLine("Total winnings: {0}", Math.Round(result.TotalWinnings, 2));
+                Console.WriteLine("Total winnings: {0}", result.TotalWinnings.ToString("F"));
             }
 
-            Console.WriteLine("New balance: {0}", Math.Round(this.account.Balance, 2));
+            Console.WriteLine("New balance: {0}", this.account.Balance.ToString("F"));
             Console.WriteLine("");
         }
 
@@ -107,7 +107,7 @@ namespace SlotMachineApp.UserInterface
 
             if (row.Winnings > 0)
             {
-                rowString += " Won: " + Math.Round(row.Winnings, 2);
+                rowString += " Won: " + row.Winnings.ToString("F");
             }
 
             Console.WriteLine(rowString);
@@ -115,7 +115,7 @@ namespace SlotMachineApp.UserInterface
 
         private void End()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Game over, thanks for playing {0}", this.game.GameTitle);
         }
     }
 }

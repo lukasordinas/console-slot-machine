@@ -22,8 +22,15 @@ namespace SlotMachineApp.Accounts
 
         public bool CreditBalance(decimal amount)
         {
-            this.Balance += amount;
-            return true;
+            if (amount > 0)
+            {
+                this.Balance += amount;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool DebitBalance(decimal amount)

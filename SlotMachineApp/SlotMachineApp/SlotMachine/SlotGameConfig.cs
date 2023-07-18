@@ -4,6 +4,9 @@ using System.Text.Json;
 
 namespace SlotMachineApp.SlotMachine
 {
+    /// <summary>
+    /// Slot game configuration loader and storage
+    /// </summary>
 	public class SlotGameConfig : ISlotGameConfig
 	{
         public IEnumerable<SlotSymbol> Symbols { get; }

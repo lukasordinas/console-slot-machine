@@ -7,7 +7,7 @@ namespace SlotMachineApp
 {
     internal class SlotMachineApp
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var services = new ServiceCollection();
             ConfigureServices(services);

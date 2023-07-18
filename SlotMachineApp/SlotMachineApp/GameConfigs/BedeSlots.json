@@ -1,0 +1,35 @@
+{
+  "GameTitle": "BedeSlots",
+  "Rows": 4,
+  "Columns":  3,
+  "SlotSymbols": [
+    {
+      "Name": "Apple",
+      "Symbol": "A",
+      "Coefficient": 0.4,
+      "Probability": 0.45,
+      "IsWildcard": false
+    },
+    {
+      "Name": "Banana",
+      "Symbol": "B",
+      "Coefficient": 0.6,
+      "Probability": 0.35,
+      "IsWildcard": false
+    },
+    {
+      "Name": "Pineapple",
+      "Symbol": "P",
+      "Coefficient": 0.8,
+      "Probability": 0.15,
+      "IsWildcard": false
+    },
+    {
+      "Name": "Wildcard",
+      "Symbol": "*",
+      "Coefficient": 0,
+      "Probability": 0.05,
+      "IsWildcard": true
+    }
+  ]
+}
